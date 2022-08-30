@@ -1,6 +1,13 @@
 using MongoExample.Models;
 using MongoExample.Services;
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+// Serilog configuration        
+builder.Host.UseSerilog((hostContext, services, configuration) =>
+{
+    configuration.ReadFrom.Configuration(hostContext.Configuration);
+});
 
 // Add services to the container.
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
@@ -22,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
