@@ -4,14 +4,15 @@ using System.Text.Json.Serialization;
 
 namespace MongoExample.Models;
 
-public class TaskModel {
+public class TaskModel
+{
 
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
 
     public string title { get; set; } = null!;
-
+    public string description { get; set; } = null!;
     // image url
     public string image { get; set; } = null!;
 
